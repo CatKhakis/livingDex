@@ -1,3 +1,90 @@
+
+@font-face {
+  font-family: 'bw2text';
+  src: url('./bw2text.otf') format('opentype'),
+    url('./bw2text.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+body {
+    background-color: #08b57b;
+
+    background-size: 28px 28px;
+    background-image:
+        linear-gradient(to right, #008463 1.5px, transparent 1.5px),
+        linear-gradient(to bottom, #008463 1.5px, transparent 1.5px);
+}
+
+#gridContainer {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 7px;
+}
+
 .hello {
-  color: red;
+  color: rgb(18, 8, 8);
+  font-family: 'bw2text';
+  font-size: 40px;
+  text-shadow: 0px 2.5px #b8b8b8;
+}
+
+.idText {
+    color: rgb(255, 255, 255);
+    font-family: 'bw2text';
+    font-size: 20px;
+    text-shadow: 0px 1.5px #8b8b8b;
+
+    background-color: #181818;
+
+    padding-right: 2px;
+}
+
+.pokemonTile {
+    background-color: #181818;
+
+    padding: 4px;
+}
+
+.topInfo {
+    position: absolute;
+
+    display: flex;
+}
+
+.gridSprite {
+    width: 141.5px;
+    aspect-ratio: 1 / 1;
+    image-rendering: crisp-edges;
+
+    background-color: white;
+
+    display: block;
+
+    background-size: 14px 14px;
+    background-image:
+        linear-gradient(to right, #dedede 1.5px, transparent 1.5px),
+        linear-gradient(to bottom, #dedede 1.5px, transparent 1.5px);
+
+    border-style: solid;
+
+    border-width: 1.5px;
+    border-color: gray;
+
+    padding-top: 8px;
+}
+
+.indexHolder {
+    width: 46px;
+    height: 18px;
+    
+    background-image: url('./spritesheet.png');
+    background-position: 0px -40px;
+    background-size: 128px 128px;
+
+    transform: scaleY(-1);
+
+
+    image-rendering: crisp-edges;
 }
