@@ -11,6 +11,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "html-loader": "^5.1.0",
     "lodash": "^4.17.21",
     "pokeapi-js-wrapper": "^1.2.8"
   },

@@ -10,6 +10,7 @@ module.exports = {
   plugins: [
      new HtmlWebpackPlugin({
       title: 'Development',
+      template: "src/template.html",
      }),
    ],
   devtool: 'inline-source-map',
@@ -20,6 +21,7 @@ module.exports = {
   output: {
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist'),
+    clean: true,
   },
   module: {
     rules: [
