@@ -32,11 +32,11 @@ pokedexSelect.addEventListener('change', function (e) {
     pokedex.getPokedexByName(e.target.selectedOptions[0].value)
         .then(function(response) {updateDex(response)})
 });
-//<option value="audi">Audi</option>
 
 
 pokedex.getPokedexByName("updated-unova")
     .then(function(response) {updateDex(response)})
+
 
 
 async function updateDex(response) {
@@ -60,6 +60,16 @@ async function updateDex(response) {
         const indexHolder = document.createElement('div');
         indexHolder.classList.add('indexHolder');
 
+        const catchIndicator = document.createElement('div');
+        catchIndicator.classList.add('catchIndicator');
+
+        if (getRndInteger(0, 1) === 1) {
+            catchIndicator.classList.add('caught');
+        }
+
+        catchIndicator.addEventListener('click', function(event) {updateCatch(event)});
+
+
         let id = url.substring(0, url.length - 1)
         id = id.substring(id.lastIndexOf('/') + 1);
 
@@ -73,6 +83,8 @@ async function updateDex(response) {
 
         pokemon.appendChild(topInfo);
         
+        pokemon.appendChild(catchIndicator);
+        
         pokemon.appendChild(img);
         gridContainer.appendChild(pokemon);
 
@@ -83,4 +95,19 @@ async function updateDex(response) {
             }
         )
     }
+}
+
+function updateCatch(event) {
+
+    const target = event.target;
+
+    if (target.classList[1]) {
+        target.classList.remove("caught");
+    } else {
+        target.classList.add("caught");
+    }
+}
+
+function getRndInteger(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) ) + min;
 }
