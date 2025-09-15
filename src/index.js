@@ -60,6 +60,9 @@ async function updateDex(response) {
         const indexHolder = document.createElement('div');
         indexHolder.classList.add('indexHolder');
 
+        const catchDiv = document.createElement('div');
+        catchDiv.classList.add("catchDiv");
+
         const catchIndicator = document.createElement('div');
         catchIndicator.classList.add('catchIndicator');
 
@@ -83,8 +86,9 @@ async function updateDex(response) {
 
         pokemon.appendChild(topInfo);
         
-        pokemon.appendChild(catchIndicator);
+        catchDiv.appendChild(catchIndicator);
         
+        pokemon.appendChild(catchDiv);
         pokemon.appendChild(img);
         gridContainer.appendChild(pokemon);
 

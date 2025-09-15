@@ -141,16 +141,27 @@ body {
     background-position: -32px -64px;
 }
 
+.catchDiv {
+    height: 149.5px;
+    width: 141.5px;
 
+    position: absolute;
+
+    display: flex;
+    justify-items: baseline;
+}
 
 .catchIndicator {
 
     position: absolute;
-    display: block;
+
+    top: 5px;
+    right: 2.5px;
+
 
     height: 26px;
     width: 26px;
-    
+
     background-image: url('./spritesheet.png');
     background-position: -52px 0px;
     background-size: 128px 128px;
