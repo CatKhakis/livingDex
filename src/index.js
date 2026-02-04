@@ -6,7 +6,7 @@ import './B2.sav';
 const response = await fetch(require('./B2.sav'));
 let bytes = await response.bytes();
 
-byteArray();
+// byteArray();
 
 //console.log(bytes.toHex())
 
@@ -134,6 +134,8 @@ async function updateDex(response) {
 
     for (const entry of response.pokemon_entries) {
 
+        
+
         let name = entry.pokemon_species.name;
         let url = entry.pokemon_species.url;
 
@@ -155,9 +157,9 @@ async function updateDex(response) {
         const catchIndicator = document.createElement('div');
         catchIndicator.classList.add('catchIndicator');
 
-        if (getRndInteger(0, 1) === 1) {
-            catchIndicator.classList.add('caught');
-        }
+        // if (getRndInteger(0, 1) === 1) {
+        //     catchIndicator.classList.add('caught');
+        // }
 
         catchIndicator.addEventListener('click', function(event) {updateCatch(event)});
 
@@ -184,7 +186,11 @@ async function updateDex(response) {
         pokedex.getPokemonByName(id)
             .then(function(response) {
 
-                img.src = response.sprites.front_default;
+                console.log(response);
+
+                //img.src = response.sprites.front_default;
+                //img.src = response.sprites.versions['generation-v']['black-white'].animated.front_default;
+                img.src = response.sprites.versions['generation-viii']['icons'].front_default;
             }
         )
     }
