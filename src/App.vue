@@ -1,10 +1,22 @@
 <script setup>
-import Type from "./components/type.vue";
+import { ref } from 'vue'
+
+import listItem from "./components/listItem.vue";
+
+const posts = ref([
+  { id: 1, title: 'Bulbasaur' },
+  { id: 2, title: 'Ivysaur' },
+  { id: 3, title: 'Venusaur' }
+])
 </script>
 
 <template>
-  <div>vue</div>
-  <Type />
+
+  <listItem
+  	v-for="post in posts"
+	  :key="post.id"
+  	:title="post.title"
+	></listItem>
 </template>
 
 <style scoped>

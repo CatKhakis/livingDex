@@ -10,10 +10,10 @@
 body {
     background-color: #08b57b;
 
-    background-size: 28px 28px;
+    background-size: 16px 16px;
     background-image:
-        linear-gradient(to right, #008463 1.5px, transparent 1.5px),
-        linear-gradient(to bottom, #008463 1.5px, transparent 1.5px);
+        linear-gradient(to right, #008463 2px, transparent 2px),
+        linear-gradient(to bottom, #008463 2px, transparent 2px);
 }
 
 #gridContainer {
