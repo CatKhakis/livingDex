@@ -241,3 +241,10 @@ body {
 
     gap: 10px;
 }
+
+sprite {
+    display: block;
+
+    background-image: url('./assets/spritesheet.png');
+    image-rendering: crisp-edges;
+}

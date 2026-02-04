@@ -31,7 +31,12 @@ module.exports = {
     rules: [
       {
         test: /\.vue$/,
-        loader: 'vue-loader'
+        loader: 'vue-loader',
+        options: {
+          compilerOptions: {
+            isCustomElement: tag => tag === 'sprite'
+          }
+        }
       },
       {
         test: /\.css$/i,
@@ -43,6 +48,10 @@ module.exports = {
       },
       {
         test: /\.sav$/i,
+        type: 'asset/resource',
+      },
+      {
+        test: /\.json$/i,
         type: 'asset/resource',
       },
     ],

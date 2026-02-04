@@ -1,83 +1,66 @@
 <script setup>
-defineProps(['title'])
+    defineProps(['dexNumber', 'name'])
+
+    function toggleCatch(event) {
+
+        if (event.target.id === "caught") {
+            event.target.id = "uncaught";
+        } else {
+            event.target.id = "caught";
+        } 
+    }
 </script>
 
 <template>
 
-    <div class="holder">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div><p>{{ title }}</p></div>
-        <div></div>
-    </div>
-
+    <sprite id="listitem">
+        <sprite id="uncaught" @click="(event) => toggleCatch(event)"></sprite>
+        <p id="dexNumber">{{ String(dexNumber).padStart(3, "0") }}</p>
+        <p id="name">{{ name }}</p>
+        
+    </sprite>
 
 </template>
 
 <style scoped>
-    .holder {
+    #listitem {
         display: flex;
-        height: 42px;
-
-        margin-bottom: 6px;
+        position:relative;
     }
 
-    .holder div {
-        height: inherit;
-
-        background-image: url('../assets/spritesheetLarge.png');
-        background-size: 1024px 768px;
-
-        image-rendering: crisp-edges;
-    }
-
-    .holder div:nth-child(1) {
-        width: 14px;
-        
-        background-position: 0px -224px;
-    }
-
-    .holder div:nth-child(2) {
-        width: 38px;
-
-        background-color: #181818;
-        background-image: none;
-    }
-
-    .holder div:nth-child(3) {
-        width: 12px;
-        
-        background-position: -18px -224px;
-    }
-
-    .holder div:nth-child(4) {
-        width: 224px;
-
-        background-color: #181818;
-        background-image: none;
-
-
-        
-    }
-
-    .holder div:nth-child(5) {
-        width: 14px;
-        
-        background-position: -34px -224px;
+    #listitem sprite {
+        position: absolute;
+        top: calc(var(--scale) * 4px);
+        left: calc(var(--scale) * 41px);
     }
 
     p {
+        position: absolute;
+
         color: #dedede;
         font-family: 'bw2text';
         font-size: 32px;
         text-shadow: 0px 2px #848484;
 
-        display: block;
         margin-block-start: 0;
         margin-inline-start: 0;
 
-        margin-top: 10px;
-        margin-left: 32px;
+        margin: 0px;
+
+        top: calc(var(--scale) * 5px);
+    }
+
+    #dexNumber {
+
+        left: calc(var(--scale) * 55px);
+    }
+
+    #name {
+
+        left: calc(var(--scale) * 84px);
+    }
+
+    #listitem {
+        margin-bottom: calc(var(--scale) * 3px);
     }
 </style>
