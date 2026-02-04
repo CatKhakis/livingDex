@@ -1,17 +1,21 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { VueLoaderPlugin } = require('vue-loader');
+
+const __base = path.resolve(__dirname, '..');
+const __src = path.resolve(__base, 'src');
 
 module.exports = {
   mode: 'development',
   entry: {
-    index: './src/index.js',
-    print: './src/print.js',
+    index: './src/main.js'
   },
   plugins: [
      new HtmlWebpackPlugin({
       title: 'Development',
       template: "src/template.html",
      }),
+     new VueLoaderPlugin()
    ],
   devtool: 'inline-source-map',
   devServer: {
@@ -26,8 +30,12 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.vue$/,
+        loader: 'vue-loader'
+      },
+      {
         test: /\.css$/i,
-        use: ['style-loader', 'css-loader'],
+        use: ['vue-style-loader', 'css-loader'],
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,

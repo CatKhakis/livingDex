@@ -1,8 +1,8 @@
 
 @font-face {
   font-family: 'bw2text';
-  src: url('./bw2text.otf') format('opentype'),
-    url('./bw2text.otf') format('opentype');
+  src: url('./assets/bw2text.otf') format('opentype'),
+    url('./assets/bw2text.otf') format('opentype');
   font-weight: 400;
   font-style: normal;
 }
@@ -79,7 +79,7 @@ body {
     width: 46px;
     height: 18px;
     
-    background-image: url('./spritesheet.png');
+    background-image: url('./assets/spritesheet.png');
     background-position: 0px -40px;
     background-size: 128px 128px;
 
@@ -129,7 +129,7 @@ body {
     width: 32px;
   /* background-color: #eee; */
 
-    background-image: url('./spritesheet.png');
+    background-image: url('./assets/spritesheet.png');
     background-position: 0px -64px;
     background-size: 128px 128px;
 
@@ -162,7 +162,7 @@ body {
     height: 26px;
     width: 26px;
 
-    background-image: url('./spritesheet.png');
+    background-image: url('./assets/spritesheet.png');
     background-position: -52px 0px;
     background-size: 128px 128px;
 
