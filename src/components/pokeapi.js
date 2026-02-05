@@ -1,7 +1,3 @@
-
-
-
-const Pokedex = require("pokeapi-js-wrapper")
 const customOptions = {
   cache: true,
   timeout: 5 * 1000, // 5s

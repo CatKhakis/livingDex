@@ -31,5 +31,3 @@ for (const slice of slices) {
         }`, stylesheet.cssRules.length);
 
 }
-
-console.log(stylesheet);
