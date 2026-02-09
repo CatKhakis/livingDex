@@ -1,5 +1,7 @@
 <script setup>
-    defineProps(['dexNumber', 'name'])
+    import {getPokemonById} from "../main.js";
+
+    const props = defineProps(['object'])
 
     function toggleCatch(event) {
 
@@ -9,15 +11,24 @@
             event.target.id = "caught";
         } 
     }
+
+    const urlArray = String(props.object.pokemon_species.url).split("/");
+    const nationalID = urlArray[urlArray.length-2];
+    
+    const pokemon = await getPokemonById(nationalID);
+    
+    const icon = pokemon.sprites.versions['generation-vii'].icons.front_default
+    
+    
 </script>
 
 <template>
 
     <sprite id="listitem">
         <sprite id="uncaught" @click="(event) => toggleCatch(event)"></sprite>
-        <p id="dexNumber">{{ String(dexNumber).padStart(3, "0") }}</p>
-        <p id="name">{{ name }}</p>
-        
+        <p id="dexNumber">{{ String(props.object.entry_number).padStart(3, "0") }}</p>
+        <p id="name">{{ props.object.pokemon_species.name }}</p>
+        <img :src="icon">
     </sprite>
 
 </template>
@@ -62,5 +73,14 @@
 
     #listitem {
         margin-bottom: calc(var(--scale) * 3px);
+    }
+
+    img {
+        position: absolute;
+        width: calc(var(--scale) * 40px);
+        height: calc(var(--scale) * 30px);
+
+        top: calc(var(--scale) * -6px);
+        left: calc(var(--scale) * -3px);
     }
 </style>
