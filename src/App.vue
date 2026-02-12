@@ -15,7 +15,7 @@
   <sprite id="chevron_pattern"></sprite>
 
   <Suspense>
-    <pokemonList></pokemonList>
+    <div id="pokemonList"><pokemonList></pokemonList></div>
   </Suspense>
   
   
@@ -24,5 +24,19 @@
 </template>
 
 <style scoped>
+
+#chevron_pattern {
+  background-repeat: repeat-x;
+  width: 100%;
+  left: 0px;
+  top: 50px;
+  position: absolute;
+
+  overflow: hidden;
+}
+
+#pokemonList {
+  overflow: scroll;
+}
   
 </style>
