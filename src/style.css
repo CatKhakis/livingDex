@@ -259,3 +259,10 @@ sprite {
     background-image: url('./assets/spritesheet.png');
     image-rendering: crisp-edges;
 }
+
+icon {
+    display: block;
+
+    background-image: url('./assets/genvicons.png');
+    image-rendering: crisp-edges;
+}

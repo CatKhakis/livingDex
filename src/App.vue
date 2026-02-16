@@ -1,16 +1,17 @@
 <script setup>
 
-  import "./components/sprite.js";
   import './style.css';
+
+  import "./components/sprite.js";
+  import "./components/icon.js";
+
 
   import pokemonList from "./components/pokemonList.vue";
 
   
-
 </script>
 
 <template>
-
 
   <sprite id="chevron_pattern"></sprite>
 

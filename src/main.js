@@ -1,11 +1,7 @@
-import './style.css';
-
 import { createApp } from 'vue'
 import App from './App.vue'
 
 import { PokemonClient, GameClient, POKEDEXES } from 'pokenode-ts'; // import the GameClient and the Pokedexes enum
-
-console.log(await getPokedex(POKEDEXES.ORIGINAL_UNOVA));
 
 export async function getPokedex(dex) {
     const api = new GameClient(); // create a GameClient
@@ -19,8 +15,15 @@ export async function getPokemonById(pokemonName) {
     return await api.getPokemonById(pokemonName);
 };
 
-
 createApp(App).mount('#app')
+
+
+
+
+
+
+
+
 
 import './assets/B2.sav';
 

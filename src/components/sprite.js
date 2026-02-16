@@ -2,13 +2,14 @@ import '../assets/spritesheet.json';
 
 const scale = 2;
 
-const response = await fetch(require('../assets/spritesheet.json'));
-let spritesheet = await response.json();
+const response_sheet = await fetch(require('../assets/spritesheet.json'));
+let spritesheet = await response_sheet.json();
 
 const size = spritesheet.meta.size;
 const slices = spritesheet.meta.slices;
 
 const stylesheet = document.styleSheets[0];
+
 stylesheet.insertRule(`sprite{background-size: ${size.w * scale}px ${size.h * scale}px;}`, stylesheet.cssRules.length);
 stylesheet.insertRule(`:root{--scale: ${scale};}`, 0);
 
@@ -29,5 +30,4 @@ for (const slice of slices) {
             height: ${bounds.h * scale}px;
             width: ${bounds.w * scale}px;
         }`, stylesheet.cssRules.length);
-
 }

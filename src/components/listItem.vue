@@ -15,9 +15,10 @@
     const urlArray = String(props.object.pokemon_species.url).split("/");
     const nationalID = urlArray[urlArray.length-2];
     
-    const pokemon = await getPokemonById(nationalID);
+    // const pokemon = await getPokemonById(nationalID);
     
-    const icon = pokemon.sprites.versions['generation-vii'].icons.front_default
+    // const icon = pokemon.sprites.versions['generation-vii'].icons.front_default
+    const iconDex = `dex${nationalID}`
     
     
 </script>
@@ -28,7 +29,11 @@
         <sprite id="uncaught" @click="(event) => toggleCatch(event)"></sprite>
         <p id="dexNumber">{{ String(props.object.entry_number).padStart(3, "0") }}</p>
         <p id="name">{{ props.object.pokemon_species.name }}</p>
-        <img :src="icon">
+
+        <icon :id="iconDex"></icon>
+        <!-- <img :src="icon"> -->
+
+        
     </sprite>
 
 </template>
@@ -75,12 +80,11 @@
         margin-bottom: calc(var(--scale) * 3px);
     }
 
-    img {
+    icon {
         position: absolute;
-        width: calc(var(--scale) * 40px);
-        height: calc(var(--scale) * 30px);
+        width: calc(var(--scale) * 32px);
+        height: calc(var(--scale) * 32px);
 
-        top: calc(var(--scale) * -6px);
-        left: calc(var(--scale) * -3px);
+        top: calc(var(--scale) * -9px);
     }
 </style>

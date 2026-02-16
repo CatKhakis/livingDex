@@ -34,7 +34,9 @@ module.exports = {
         loader: 'vue-loader',
         options: {
           compilerOptions: {
-            isCustomElement: tag => tag === 'sprite'
+            isCustomElement: (tag) => {
+              return tag.startsWith('sprite') || tag.startsWith('icon')
+            }
           }
         }
       },

@@ -5,7 +5,8 @@
 
     import { GameClient, POKEDEXES } from 'pokenode-ts'; // import the GameClient and the Pokedexes enum
     import {getPokedex} from "../main.js";
-    const pokemon = await getPokedex(POKEDEXES.ORIGINAL_UNOVA);
+    // const pokemon = await getPokedex(POKEDEXES.ORIGINAL_UNOVA);
+    const pokemon = await getPokedex(POKEDEXES.NATIONAL)
 </script>
 
 <template>
