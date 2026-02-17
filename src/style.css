@@ -253,6 +253,11 @@ body {
     gap: 10px;
 }
 
+#app {
+    display: flex;
+    padding-top: 10px;
+}
+
 sprite {
     display: block;
 

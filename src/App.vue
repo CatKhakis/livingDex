@@ -5,21 +5,23 @@
   import "./components/sprite.js";
   import "./components/icon.js";
 
-
   import pokemonList from "./components/pokemonList.vue";
-
+  import dexList from "./components/dexList.vue";
   
 </script>
 
 <template>
 
-  <sprite id="chevron_pattern"></sprite>
+  <!-- <sprite id="chevron_pattern"></sprite> -->
+
+  <Suspense>
+    <dexList></dexList>
+  </Suspense>
 
   <Suspense>
     <div id="pokemonList"><pokemonList></pokemonList></div>
   </Suspense>
-  
-  
+
   
 
 </template>
@@ -39,5 +41,7 @@
 #pokemonList {
   overflow: scroll;
 }
+
+
   
 </style>

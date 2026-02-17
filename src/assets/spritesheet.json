@@ -16,6 +16,8 @@
   "size": { "w": 256, "h": 512 },
   "scale": "1",
   "slices": [
+   { "name": "list_selected", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 160, "y": 22, "w": 63, "h": 22 } }] },
+   { "name": "list", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 160, "y": 0, "w": 63, "h": 22 } }] },
    { "name": "top_forms", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 0, "y": 422, "w": 256, "h": 20 } }] },
    { "name": "top_pokedex", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 0, "y": 373, "w": 256, "h": 49 } }] },
    { "name": "shiny", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 68, "y": 59, "w": 7, "h": 7 } }] },
