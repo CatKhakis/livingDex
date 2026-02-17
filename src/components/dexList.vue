@@ -1,64 +1,77 @@
 <script setup>
 
-    import { ref } from 'vue'
+    import arrowButton from "./arrowButton.vue";
+    import { ref, useTemplateRef } from 'vue'
 
     import { GameClient, LocationClient } from 'pokenode-ts'; // import the GameClient and the Pokedexes enum
     const api = new LocationClient(); // create a GameClient
 
-    const regions = await api.listRegions();
-    const fullRegions = [];
+    const regionList = await api.listRegions();
+    const dexList = {'dexes': []};
 
-    //console.log(regions.results)
+    //loads each individual region (includes dex info) and overwrites corresponding simple region info
+    for(const region in regionList.results) {
 
-    // for (const region of regions.results) {
-    //     fullRegions.push(await api.getRegionByName(region.name));
-    // }
-
-    console.log(fullRegions);
+        regionList.results.splice(region, 1, await api.getRegionByName(regionList.results[region].name))
+        
+    }
 
     const selectedRegion = ref();
+    const selectedDex = ref();
 
-    function update(event) {
-        if (event) {
-            selectedRegion.value = event.target.children[0].innerHTML;
-        }
+    function updateRegion(region) {
+
+        dexList.dexes = dexList.dexes.splice(0);
+        dexList.dexes = dexList.dexes.concat(region.pokedexes)
+
+        console.log(dexList.dexes);
     }
-    
-
 </script>
 
 <template>
 
-    <div id="dexList">
+    <div id="dexSelector">
 
-        <sprite id="list"><p>National</p></sprite>
+        <arrowButton :text="selectedRegion"></arrowButton>
 
-        <sprite id="list" 
-            @click="update"
-            v-for="region in regions.results">
+        <div id="regionList" >
 
-            <p>{{ region.name.charAt(0).toUpperCase() + region.name.slice(1) }}</p>
-        </sprite>
+            <sprite id="list" 
+                v-for="region in regionList.results"
+                @click="updateRegion(region)">
 
-        <p>{{ selectedRegion }}</p>
+                <p>{{ region.name.charAt(0).toUpperCase() + region.name.slice(1) }}</p>
+            </sprite>
+        </div>
+
+            <div id="dexList">
+
+                <sprite id="list"><p>National</p></sprite>
+
+                <sprite id="list" 
+                    
+                    v-for="dex in dexList.dexes">
+
+                    <p>{{ dex.name }}</p>
+                </sprite>
+            </div>
     </div>
-    <!-- <listItem
-        v-for="pokemon in pokemon.pokemon_entries"
-        :key="pokemon.entry_number"
-        :object="pokemon"
-    ></listItem> -->
 
 </template>
 
 <style scoped>
 
-    #dexList {
+    #dexList, #regionList {
         margin-right: 50px;
     }
 
-    #dexList sprite {
+    #dexList sprite, #regionList sprite {
         margin-bottom: calc(var(--scale) * 1px);
         position:relative;
+    }
+
+    #regionList {
+        margin-bottom: 20px;
     }
 
     p {
