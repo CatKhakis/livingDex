@@ -15,6 +15,14 @@
     // }
 
     console.log(fullRegions);
+
+    const selectedRegion = ref();
+
+    function update(event) {
+        if (event) {
+            selectedRegion.value = event.target.children[0].innerHTML;
+        }
+    }
     
 
 </script>
@@ -23,7 +31,16 @@
 
     <div id="dexList">
 
-        <sprite v-for="region in regions.results" id="list"><p>{{ region.name.charAt(0).toUpperCase() + region.name.slice(1) }}</p></sprite>
+        <sprite id="list"><p>National</p></sprite>
+
+        <sprite id="list" 
+            @click="update"
+            v-for="region in regions.results">
+
+            <p>{{ region.name.charAt(0).toUpperCase() + region.name.slice(1) }}</p>
+        </sprite>
+
+        <p>{{ selectedRegion }}</p>
     </div>
     <!-- <listItem
         v-for="pokemon in pokemon.pokemon_entries"
@@ -59,6 +76,8 @@
 
         bottom: calc(var(--scale) * 4px);
         left: calc(var(--scale) * 2px);
+
+        pointer-events: none;
     }
 
 </style>

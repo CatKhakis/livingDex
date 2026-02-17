@@ -2,8 +2,8 @@
 
   import './style.css';
 
-  import "./components/sprite.js";
-  import "./components/icon.js";
+  import "./scripts/sprite.js";
+  import "./scripts/icon.js";
 
   import pokemonList from "./components/pokemonList.vue";
   import dexList from "./components/dexList.vue";
