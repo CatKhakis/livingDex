@@ -1,30 +1,37 @@
 <script setup>
 
     import arrowButton from "./arrowButton.vue";
-    import { ref, useTemplateRef } from 'vue'
+    import { ref } from 'vue'
 
     import { GameClient, LocationClient } from 'pokenode-ts'; // import the GameClient and the Pokedexes enum
     const api = new LocationClient(); // create a GameClient
 
     const regionList = await api.listRegions();
-    const dexList = {'dexes': []};
+    const dexList = ref({'dexes': [{'name': 'National', 'url': 'https://pokeapi.co/api/v2/pokedex/1/'}]});
 
     //loads each individual region (includes dex info) and overwrites corresponding simple region info
     for(const region in regionList.results) {
 
         regionList.results.splice(region, 1, await api.getRegionByName(regionList.results[region].name))
-        
     }
 
     const selectedRegion = ref();
-    const selectedDex = ref();
 
     function updateRegion(region) {
 
-        dexList.dexes = dexList.dexes.splice(0);
-        dexList.dexes = dexList.dexes.concat(region.pokedexes)
+        selectedRegion.value = region.name;
+        
+        dexList.value.dexes.splice(1);
+        dexList.value.dexes = dexList.value.dexes.concat(region.pokedexes)
 
-        console.log(dexList.dexes);
+        document.getElementById('regionList').style.setProperty('display', 'none');
+    }
+
+    function reset() {
+
+        selectedRegion.value = '';
+        dexList.value.dexes.splice(1);
+        document.getElementById('regionList').style.setProperty('display', 'block');
     }
 </script>
 
@@ -32,7 +39,7 @@
 
     <div id="dexSelector">
 
-        <arrowButton :text="selectedRegion"></arrowButton>
+        <arrowButton :text="selectedRegion" @click="reset"></arrowButton>
 
         <div id="regionList" >
 
@@ -46,12 +53,11 @@
 
             <div id="dexList">
 
-                <sprite id="list"><p>National</p></sprite>
-
                 <sprite id="list" 
+                    v-for="dex in dexList.dexes"
+                    @click="$emit('updateDex', dex)">
                     
-                    v-for="dex in dexList.dexes">
-
+                    
                     <p>{{ dex.name }}</p>
                 </sprite>
             </div>

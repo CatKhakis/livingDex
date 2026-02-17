@@ -1,6 +1,4 @@
 <script setup>
-    import {getPokemonById} from "../main.js";
-
     const props = defineProps(['object'])
 
     function toggleCatch(event) {
@@ -12,15 +10,12 @@
         } 
     }
 
+    console.log(props.object.pokemon_species.url);
+
     const urlArray = String(props.object.pokemon_species.url).split("/");
     const nationalID = urlArray[urlArray.length-2];
-    
-    // const pokemon = await getPokemonById(nationalID);
-    
-    // const icon = pokemon.sprites.versions['generation-vii'].icons.front_default
+
     const iconDex = `dex${nationalID}`
-    
-    
 </script>
 
 <template>
@@ -31,9 +26,6 @@
         <p id="name">{{ props.object.pokemon_species.name }}</p>
 
         <icon :id="iconDex"></icon>
-        <!-- <img :src="icon"> -->
-
-        
     </sprite>
 
 </template>

@@ -5,8 +5,16 @@
   import "./scripts/sprite.js";
   import "./scripts/icon.js";
 
+  import { ref } from 'vue'
+
   import pokemonList from "./components/pokemonList.vue";
   import dexList from "./components/dexList.vue";
+
+  const selectedDex = ref({'name': 'National'});
+
+  function updateDex(dex) {
+    selectedDex.value = dex;
+  }
   
 </script>
 
@@ -15,11 +23,11 @@
   <!-- <sprite id="chevron_pattern"></sprite> -->
 
   <Suspense>
-    <dexList></dexList>
+    <dexList @update-dex="updateDex"></dexList>
   </Suspense>
 
   <Suspense>
-    <div id="pokemonList"><pokemonList></pokemonList></div>
+    <div id="pokemonList"><pokemonList :dex="selectedDex"></pokemonList></div>
   </Suspense>
 
   
