@@ -1,5 +1,6 @@
 <script setup>
     const props = defineProps(['object'])
+    import { ref } from 'vue';
 
     function toggleCatch(event) {
 
@@ -9,13 +10,6 @@
             event.target.id = "caught";
         } 
     }
-
-    console.log(props.object.pokemon_species.url);
-
-    const urlArray = String(props.object.pokemon_species.url).split("/");
-    const nationalID = urlArray[urlArray.length-2];
-
-    const iconDex = `dex${nationalID}`
 </script>
 
 <template>
@@ -25,7 +19,7 @@
         <p id="dexNumber">{{ String(props.object.entry_number).padStart(3, "0") }}</p>
         <p id="name">{{ props.object.pokemon_species.name }}</p>
 
-        <icon :id="iconDex"></icon>
+        <icon :id="`dex${props.object.pokemon_species.url.substring(42).replace(/\/$/, '')}`"></icon>
     </sprite>
 
 </template>

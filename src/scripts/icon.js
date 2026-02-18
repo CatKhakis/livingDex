@@ -13,6 +13,8 @@ stylesheet.insertRule(`icon{background-size: ${size.w * scale}px ${size.h * scal
 
 for (const frame of spritesheet.frames) {
 
+    
+
     const constructor = `#dex${frame.filename.split(".")[0]}`
 
     const bounds = frame['frame'];
@@ -23,6 +25,24 @@ for (const frame of spritesheet.frames) {
             height: ${bounds.h * scale}px;
             width: ${bounds.w * scale}px;
         }`, stylesheet.cssRules.length);
+    
+    if (frame.filename.split(".")[0] === '204') {
+        console.log(`
+        ${constructor} {
+            background-position: -${bounds.x * scale}px -${bounds.y * scale}px;
+            height: ${bounds.h * scale}px;
+            width: ${bounds.w * scale}px;
+        }`)
+    }
 }
 
+//icon spritesheet is missing these icons!!! along with the corresponding JSON.
 
+//missing icon IDs
+
+//205 - 228
+//230 - 231
+//410 - 416
+//457 - 491
+//623 - 638
+//641
