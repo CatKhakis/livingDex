@@ -6,20 +6,32 @@
 
 <template>
 
-    <sprite id="arrowButton">
-        <p>{{ props.text }}</p>
-    </sprite>
+    <div class="leftButton">
+
+        <sprite id="list">
+            <p>{{ props.text }}</p>
+        </sprite>
+
+        <sprite id="list-cap"></sprite>
+    </div>
 
 </template>
 
 <style scoped>
 
-    #arrowButton {
-        margin-right: 25px;
+    .leftButton {
+        display: flex;
+        flex-direction: row;
+
         margin-bottom: calc(var(--scale) * 1px);
+    }
+
+    #list {
+        width: 100%;
+        background-repeat: repeat-x;
         position:relative;
 
-        display: none;
+        overflow: hidden;
     }
 
     p {
@@ -40,5 +52,7 @@
 
         pointer-events: none;
     }
+
+    
     
 </style>

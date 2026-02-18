@@ -1,6 +1,7 @@
 <script setup>
 
     import arrowButton from "./arrowButton.vue";
+    import leftButton from "./leftButton.vue";
     import { ref } from 'vue'
 
     import { GameClient, LocationClient } from 'pokenode-ts'; // import the GameClient and the Pokedexes enum
@@ -25,6 +26,7 @@
         dexList.value.dexes = dexList.value.dexes.concat(region.pokedexes)
 
         document.getElementById('regionList').style.setProperty('display', 'none');
+        document.getElementById('arrowButton').style.setProperty('display', 'block');
     }
 
     function reset() {
@@ -32,6 +34,7 @@
         selectedRegion.value = '';
         dexList.value.dexes.splice(1);
         document.getElementById('regionList').style.setProperty('display', 'block');
+        document.getElementById('arrowButton').style.setProperty('display', 'none');
     }
 </script>
 
@@ -43,37 +46,34 @@
 
         <div id="regionList" >
 
-            <sprite id="list" 
+            <leftButton
                 v-for="region in regionList.results"
-                @click="updateRegion(region)">
-
-                <p>{{ region.name.charAt(0).toUpperCase() + region.name.slice(1) }}</p>
-            </sprite>
+                @click="updateRegion(region)"
+                :text="region.name.charAt(0).toUpperCase() + region.name.slice(1)">
+            </leftButton>
         </div>
 
-            <div id="dexList">
+        <div id="dexList">
 
-                <sprite id="list" 
-                    v-for="dex in dexList.dexes"
-                    @click="$emit('updateDex', dex)">
-                    
-                    
-                    <p>{{ dex.name }}</p>
-                </sprite>
-            </div>
+            <leftButton
+                v-for="dex in dexList.dexes"
+                @click="$emit('updateDex', dex)"
+                :text="dex.name">>
+            </leftButton>
+        </div>
     </div>
 
 </template>
 
 <style scoped>
 
-    #dexList, #regionList {
+    #dexSelector {
+        width: calc(var(--scale) * 105px);
         margin-right: 50px;
     }
 
-    #dexList sprite, #regionList sprite {
-        margin-bottom: calc(var(--scale) * 1px);
-        position:relative;
+    #dexList, #regionList {
+        width: 100%;
     }
 
     #regionList {
