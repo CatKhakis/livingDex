@@ -9,6 +9,7 @@
 
   import pokemonList from "./components/pokemonList.vue";
   import dexList from "./components/dexList.vue";
+  import habitat from "./components/habitat.vue";
 
   const selectedDex = ref({'name': 'National'});
 
@@ -21,6 +22,8 @@
 <template>
 
   <!-- <sprite id="chevron_pattern"></sprite> -->
+
+  <habitat></habitat>
 
   <Suspense>
     <dexList @update-dex="updateDex"></dexList>
