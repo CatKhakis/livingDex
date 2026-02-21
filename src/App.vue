@@ -1,5 +1,7 @@
 <script setup>
 
+  import { ref } from 'vue'
+
   import './style.css';
 
   import "./scripts/sprite.js";
@@ -9,16 +11,21 @@
   const gameAPI = new GameClient(); // create a GameClient
   const locationAPI = new LocationClient(); // create a GameClient
 
-  import { ref } from 'vue'
-
-  import pokemonList from "./components/pokemonList.vue";
   import dexList from "./components/dexList.vue";
   import habitat from "./components/habitat.vue";
+  import dexEntry from "./components/dexEntry.vue";
 
   const selectedDex = ref({'name': 'original-unova'});
+  const locations = ref([]);
+  const pokemon = ref([]);
+
+  updateDex(selectedDex.value);
+
 
   async function updateDex(dex) {
     selectedDex.value = dex;
+
+    pokemon.value = await gameAPI.getPokedexByName(selectedDex.value.name);
 
     updateLocations(dex);
   }
@@ -30,11 +37,6 @@
       locations.value = (await locationAPI.getRegionByName(fullDex.region.name)).locations;
     }
   }
-
-  updateLocations(selectedDex.value);
-
-  const locations = ref([]);
-  
 </script>
 
 <template>
@@ -57,7 +59,13 @@
   </Suspense>
 
   <Suspense>
-    <div id="pokemonList"><pokemonList :dex="selectedDex"></pokemonList></div>
+    <div id="pokemonList">
+      <dexEntry
+        v-for="pokemon in pokemon.pokemon_entries"
+        :key="pokemon.entry_number"
+        :object="pokemon"
+      ></dexEntry>
+  </div>
   </Suspense>
 
   
