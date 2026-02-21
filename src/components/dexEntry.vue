@@ -1,19 +1,46 @@
 <script setup>
-    const props = defineProps(['object'])
+    const props = defineProps(['object', 'versions'])
     import { ref } from 'vue';
 
     import { GameClient, PokemonClient } from 'pokenode-ts';
     const pokemonAPI = new PokemonClient(); // create a GameClient
 
-    //console.log(props.object.pokemon_species.name);
+    
     const encounterAreas = await pokemonAPI.getPokemonLocationAreaById(props.object.pokemon_species.url.substring(42).replace(/\/$/, ''))
+
+    //saves values to new array. this causes duplicate data to be stored inside each pokemon object. this needs to be fixed.
+    const newAreas = [];
+    
+
     if (encounterAreas.length === 0) {
-        //console.log(props.object);
+
+        //pokemon must be obtained via evolution or event
+
     } else {
-        //console.log(props.object);
         for (const area of encounterAreas) {
-            //console.log(area);
+
+            if(checkVersion(area.version_details)) {
+
+                newAreas.push(area);
+            }
         }
+    }
+
+    console.log(props.object.pokemon_species.name);
+    console.log(newAreas);
+
+
+    function checkVersion(details) {
+        for (const detail of details) {
+            for (const version of props.versions) {
+
+                if (detail.version.name === version.name) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     function toggleCatch(event) {

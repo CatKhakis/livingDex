@@ -18,6 +18,7 @@
   const selectedDex = ref({'name': 'original-unova'});
   const locations = ref([]);
   const pokemon = ref([]);
+  const versions = ref([])
 
   updateDex(selectedDex.value);
 
@@ -26,6 +27,9 @@
     selectedDex.value = dex;
 
     pokemon.value = await gameAPI.getPokedexByName(selectedDex.value.name);
+    versions.value = (await gameAPI.getVersionGroupByName(pokemon.value.version_groups[0].name)).versions;
+
+    console.log(versions.value);
 
     updateLocations(dex);
   }
@@ -64,6 +68,7 @@
         v-for="pokemon in pokemon.pokemon_entries"
         :key="pokemon.entry_number"
         :object="pokemon"
+        :versions="versions"
       ></dexEntry>
   </div>
   </Suspense>
