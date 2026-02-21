@@ -2,6 +2,18 @@
     const props = defineProps(['object'])
     import { ref } from 'vue';
 
+    import { GameClient, PokemonClient } from 'pokenode-ts';
+    const pokemonAPI = new PokemonClient(); // create a GameClient
+
+    //console.log(props.object.pokemon_species.name);
+    const encounterAreas = await pokemonAPI.getPokemonLocationAreaById(props.object.pokemon_species.url.substring(42).replace(/\/$/, ''))
+    if (encounterAreas.length === 0) {
+        //console.log(props.object);
+    } else {
+        console.log(props.object);
+        console.log(encounterAreas);
+    }
+
     function toggleCatch(event) {
 
         if (event.target.id === "caught") {

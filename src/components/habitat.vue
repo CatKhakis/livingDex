@@ -1,19 +1,80 @@
 <script setup>
+
+    import { ref } from 'vue'
+
+    import { GameClient, LocationClient } from 'pokenode-ts'; // import the GameClient and the Pokedexes enum
+    const api = new LocationClient(); // create a GameClient
+
+    const props = defineProps(['object'])
+
+    const location = await api.getLocationByName(props.object.name)
+    const name = ref();
+
+    const grassDisplay = ref('hidden');
+    const surfDisplay = ref('hidden');
+    const fishDisplay = ref('hidden');
+
+    for (const nameData of location.names) {
+
+        if (nameData.language.name === 'en') {
+            name.value = nameData.name;
+        }
+    }
+
+    //console.log(await api.getLocationAreaByName('unova-route-8-area'))
+
+    if (location.areas.length > 0) {
+
+        for (const area of location.areas) {
+            const areaData = await api.getLocationAreaByName(area.name)
+            
+            for (const encounter of areaData.encounter_method_rates) {
+                
+                switch(encounter.encounter_method.name) {
+                    case 'rock-smash':
+                    case 'dark-grass':
+                    case 'walk':
+                        grassDisplay.value = '';
+                        break;
+
+                    case 'surf':
+                        surfDisplay.value = '';
+                        break;
+
+                    case 'super-rod':
+                    case 'old-rod':
+                    case 'good-rod':
+                        fishDisplay.value = '';
+                        break;
+
+                    default:
+                        console.log(encounter.encounter_method.name);
+                }
+            }
+
+            if (areaData.encounter_method_rates.length === 0) {
+                console.log(areaData);
+            }
+        }
+    } else {
+        //console.log(location);
+    }
+
     
 </script>
 
 <template>
     <div id="Habitat">
         <div id="Habitat_main">
-            <sprite id="habitat_grass">
+            <sprite id="habitat_grass" :class="grassDisplay">
                 <sprite id="habitat_seen"></sprite>
                 <sprite id="habitat_caught"></sprite>
             </sprite>
-            <sprite id="habitat_surf">
+            <sprite id="habitat_surf" :class="surfDisplay">
                 <sprite id="habitat_seen"></sprite>
                 <sprite id="habitat_caught"></sprite>
             </sprite>
-            <sprite id="habitat_fish">
+            <sprite id="habitat_fish" :class="fishDisplay">
                 <sprite id="habitat_seen"></sprite>
                 <sprite id="habitat_caught"></sprite>
             </sprite>
@@ -27,7 +88,7 @@
             <sprite id="habitatSelect_right"></sprite>
         </div>
 
-        <p>Route 20</p>
+        <p>{{ name }}</p>
     </div>
 
 
@@ -56,6 +117,8 @@
 
         width: calc(var(--scale) * 190px);
         height: calc(var(--scale) * 23px);
+
+        min-height: calc(var(--scale) * 23px);
 
         div {
             display: flex;
@@ -121,6 +184,10 @@
 
         top: calc(var(--scale) * 6px);
         left: calc(var(--scale) * 58px);
+    }
+
+    .hidden {
+        display: none;
     }
     
 </style>

@@ -5,17 +5,40 @@
   import "./scripts/sprite.js";
   import "./scripts/icon.js";
 
+  import { GameClient, LocationClient } from 'pokenode-ts'; // import the GameClient and the Pokedexes enum
+  const gameAPI = new GameClient(); // create a GameClient
+  const locationAPI = new LocationClient(); // create a GameClient
+
   import { ref } from 'vue'
 
   import pokemonList from "./components/pokemonList.vue";
   import dexList from "./components/dexList.vue";
   import habitat from "./components/habitat.vue";
 
-  const selectedDex = ref({'name': 'National'});
+  const selectedDex = ref({'name': 'original-unova'});
 
-  function updateDex(dex) {
+  async function updateDex(dex) {
     selectedDex.value = dex;
+
+    updateLocations(dex);
   }
+
+  async function updateLocations(dex) {
+    const fullDex = await gameAPI.getPokedexByName(dex.name);
+
+    if (fullDex.region) {
+      locations.value = (await locationAPI.getRegionByName(fullDex.region.name)).locations;
+    }
+  }
+
+  updateLocations(selectedDex.value);
+
+  const locations = ref([
+    {name: "mistralton-city", url: "https://pokeapi.co/api/v2/location/353/"},
+    {name: "icirrus-city", url: "https://pokeapi.co/api/v2/location/354/"},
+    {name: "opelucid-city", url: "https://pokeapi.co/api/v2/location/355/"},
+    {name: "unova-route-1", url: "https://pokeapi.co/api/v2/location/356/"},
+  ]);
   
 </script>
 
@@ -23,7 +46,16 @@
 
   <!-- <sprite id="chevron_pattern"></sprite> -->
 
-  <habitat></habitat>
+  <Suspense>
+    <div id="habitatList">
+      <habitat 
+        v-for="location in locations"
+        :key="location.name"
+        :object="location">
+      </habitat>
+    </div>
+  </Suspense>
+  
 
   <Suspense>
     <dexList @update-dex="updateDex"></dexList>
@@ -49,8 +81,13 @@
   overflow: hidden;
 }
 
-#pokemonList {
+#pokemonList, #habitatList {
   overflow: scroll;
+}
+
+#habitatList {
+  display: flex;
+  flex-direction: column;
 }
 
 
