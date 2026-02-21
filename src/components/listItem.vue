@@ -10,8 +10,10 @@
     if (encounterAreas.length === 0) {
         //console.log(props.object);
     } else {
-        console.log(props.object);
-        console.log(encounterAreas);
+        //console.log(props.object);
+        for (const area of encounterAreas) {
+            //console.log(area);
+        }
     }
 
     function toggleCatch(event) {

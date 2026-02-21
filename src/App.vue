@@ -33,12 +33,7 @@
 
   updateLocations(selectedDex.value);
 
-  const locations = ref([
-    {name: "mistralton-city", url: "https://pokeapi.co/api/v2/location/353/"},
-    {name: "icirrus-city", url: "https://pokeapi.co/api/v2/location/354/"},
-    {name: "opelucid-city", url: "https://pokeapi.co/api/v2/location/355/"},
-    {name: "unova-route-1", url: "https://pokeapi.co/api/v2/location/356/"},
-  ]);
+  const locations = ref([]);
   
 </script>
 

@@ -21,46 +21,6 @@
         }
     }
 
-    //console.log(await api.getLocationAreaByName('unova-route-8-area'))
-
-    if (location.areas.length > 0) {
-
-        for (const area of location.areas) {
-            const areaData = await api.getLocationAreaByName(area.name)
-            
-            for (const encounter of areaData.encounter_method_rates) {
-                
-                switch(encounter.encounter_method.name) {
-                    case 'rock-smash':
-                    case 'dark-grass':
-                    case 'walk':
-                        grassDisplay.value = '';
-                        break;
-
-                    case 'surf':
-                        surfDisplay.value = '';
-                        break;
-
-                    case 'super-rod':
-                    case 'old-rod':
-                    case 'good-rod':
-                        fishDisplay.value = '';
-                        break;
-
-                    default:
-                        console.log(encounter.encounter_method.name);
-                }
-            }
-
-            if (areaData.encounter_method_rates.length === 0) {
-                console.log(areaData);
-            }
-        }
-    } else {
-        //console.log(location);
-    }
-
-    
 </script>
 
 <template>
