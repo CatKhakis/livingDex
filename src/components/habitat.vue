@@ -130,18 +130,6 @@
     }
 
     p {
-        position: absolute;
-
-        color: #dedede;
-        font-family: 'bw2text';
-        font-size: 32px;
-        text-shadow: 0px 2px #848484;
-
-        margin-block-start: 0;
-        margin-inline-start: 0;
-
-        margin: 0px;
-
         top: calc(var(--scale) * 6px);
         left: calc(var(--scale) * 58px);
     }

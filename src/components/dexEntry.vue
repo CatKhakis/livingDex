@@ -5,7 +5,7 @@
     import { GameClient, PokemonClient } from 'pokenode-ts';
     const pokemonAPI = new PokemonClient(); // create a GameClient
 
-    
+
     const encounterAreas = await pokemonAPI.getPokemonLocationAreaById(props.object.pokemon_species.url.substring(42).replace(/\/$/, ''))
 
     //saves values to new array. this causes duplicate data to be stored inside each pokemon object. this needs to be fixed.
@@ -14,7 +14,7 @@
 
     if (encounterAreas.length === 0) {
 
-        //pokemon must be obtained via evolution or event
+        //pokemon in this criteria must be obtained via evolution or event
 
     } else {
         for (const area of encounterAreas) {
@@ -25,6 +25,11 @@
             }
         }
     }
+
+    //removes data inside initial array since only the newAreas array is used. this solves the duplicate data problem but does not feel like a clean solution.
+    //possible solution could be adding on the new data to the initial array and then once this is complete deleting all the entries before the new data.
+    //Best solution would be culling all unnecessary data and leaving the relevant data.
+    encounterAreas.splice(0);
 
     console.log(props.object.pokemon_species.name);
     console.log(newAreas);
@@ -78,18 +83,6 @@
     }
 
     p {
-        position: absolute;
-
-        color: #dedede;
-        font-family: 'bw2text';
-        font-size: 32px;
-        text-shadow: 0px 2px #848484;
-
-        margin-block-start: 0;
-        margin-inline-start: 0;
-
-        margin: 0px;
-
         top: calc(var(--scale) * 5px);
     }
 
