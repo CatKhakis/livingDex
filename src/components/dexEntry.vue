@@ -2,16 +2,16 @@
     const props = defineProps(['object', 'versions'])
     import { ref } from 'vue';
 
+    const emit = defineEmits(['area'])
+
     import { GameClient, PokemonClient } from 'pokenode-ts';
     const pokemonAPI = new PokemonClient(); // create a GameClient
-
 
     const encounterAreas = await pokemonAPI.getPokemonLocationAreaById(props.object.pokemon_species.url.substring(42).replace(/\/$/, ''))
 
     //saves values to new array. this causes duplicate data to be stored inside each pokemon object. this needs to be fixed.
     const newAreas = [];
     
-
     if (encounterAreas.length === 0) {
 
         //pokemon in this criteria must be obtained via evolution or event
@@ -31,8 +31,19 @@
     //Best solution would be culling all unnecessary data and leaving the relevant data.
     encounterAreas.splice(0);
 
-    console.log(props.object.pokemon_species.name);
-    console.log(newAreas);
+    if (newAreas.length === 0) {
+
+        //console.log(`${props.object.pokemon_species.name}  -  no area`);
+
+    } else {
+        for (const area of newAreas) {
+
+            //console.log(`${props.object.pokemon_species.name}  -  ${area.location_area.name}`);
+            emit('area', props.object.pokemon_species.url.substring(42).replace(/\/$/, ''), area);
+        }
+    }
+
+    
 
 
     function checkVersion(details) {

@@ -18,7 +18,9 @@
   const selectedDex = ref({'name': 'original-unova'});
   const locations = ref([]);
   const pokemon = ref([]);
-  const versions = ref([])
+  const versions = ref([]);
+
+  const locationIndices = [];
 
   updateDex(selectedDex.value);
 
@@ -29,8 +31,6 @@
     pokemon.value = await gameAPI.getPokedexByName(selectedDex.value.name);
     versions.value = (await gameAPI.getVersionGroupByName(pokemon.value.version_groups[0].name)).versions;
 
-    console.log(versions.value);
-
     updateLocations(dex);
   }
 
@@ -39,7 +39,35 @@
 
     if (fullDex.region) {
       locations.value = (await locationAPI.getRegionByName(fullDex.region.name)).locations;
+
+      for (const location of locations.value) {
+        //location.encounters;
+        
+
+        for (const index of locationIndices) {
+
+          if(!location.encounters) {
+            location.encounters = [];
+          }
+
+          if (index.areaObject.location_area.name.includes(location.name)) {
+            location.encounters.push(index);
+          }
+        }
+      }
+
+      console.log(locations.value);
+      //console.log(locationIndices);
     }
+  }
+
+
+  function forwardArea(id, area) {
+    locationIndices.push({'dexID': id, 'areaObject': area});
+    //console.log(id);
+    //console.log(area);
+    //console.log(await locations.value);
+    //console.log(locationIndices);
   }
 </script>
 
@@ -66,9 +94,10 @@
     <div id="pokemonList">
       <dexEntry
         v-for="pokemon in pokemon.pokemon_entries"
-        :key="pokemon.entry_number"
+        :key="pokemon.pokemon_species.url.substring(42).replace(/\/$/, '')"
         :object="pokemon"
         :versions="versions"
+        @area="forwardArea"
       ></dexEntry>
   </div>
   </Suspense>

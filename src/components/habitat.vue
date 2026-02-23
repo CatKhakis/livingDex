@@ -21,6 +21,8 @@
         }
     }
 
+    //console.log(props.object.encounters)
+
 </script>
 
 <template>
@@ -49,6 +51,7 @@
         </div>
 
         <p>{{ name }}</p>
+        <!-- <p>{{ props.object.encounters }}</p> -->
     </div>
 
 
