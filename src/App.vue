@@ -61,10 +61,6 @@
 
   function forwardArea(id, area) {
     locationIndices.push({'dexID': id, 'areaObject': area});
-    //console.log(id);
-    //console.log(area);
-    //console.log(await locations.value);
-    //console.log(locationIndices);
   }
 </script>
 
@@ -120,8 +116,12 @@
 }
 
 #habitatList {
+  width: calc(var(--scale) * 206px);
+
   display: flex;
   flex-direction: column;
+
+  align-items: flex-end;
 }
 
 

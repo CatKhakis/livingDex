@@ -16,6 +16,7 @@
   "size": { "w": 256, "h": 1024 },
   "scale": "1",
   "slices": [
+   { "name": "habitat_special", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 175, "y": 150, "w": 21, "h": 21 } }] },
    { "name": "map_cursor", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 202, "y": 92, "w": 16, "h": 16 } }] },
    { "name": "map_location", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 226, "y": 52, "w": 6, "h": 8 } }] },
    { "name": "map_marker", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 223, "y": 60, "w": 9, "h": 18 } }] },
@@ -38,7 +39,7 @@
    { "name": "habitat_grass", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 154, "y": 150, "w": 21, "h": 21 } }] },
    { "name": "habitat_selected", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 20, "y": 171, "w": 134, "h": 21 } }] },
    { "name": "habitat", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 20, "y": 150, "w": 134, "h": 21 } }] },
-   { "name": "habitat_completed", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 175, "y": 152, "w": 36, "h": 19 } }] },
+   { "name": "habitat_completed", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 151, "y": 131, "w": 36, "h": 19 } }] },
    { "name": "habitatSelect_right", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 10, "y": 150, "w": 10, "h": 23 } }] },
    { "name": "habitatSelect_left", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 0, "y": 150, "w": 10, "h": 23 } }] },
    { "name": "list-cap_selected", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 140, "y": 193, "w": 3, "h": 22 } }] },
