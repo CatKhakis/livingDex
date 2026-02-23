@@ -55,9 +55,6 @@
           }
         }
       }
-
-      console.log(locations.value);
-      //console.log(locationIndices);
     }
   }
 

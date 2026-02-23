@@ -21,7 +21,73 @@
         }
     }
 
-    //console.log(props.object.encounters)
+    // for (const area of location.areas) {
+
+    //     const areaDetail = await api.getLocationAreaByName(area.name);
+
+    //     console.log(areaDetail);
+    // }
+
+    if (location.areas.length > 0) {
+
+        for (const area of location.areas) {
+            const areaData = await api.getLocationAreaByName(area.name)
+            
+            for (const encounter of areaData.encounter_method_rates) {
+                
+                switch(encounter.encounter_method.name) {
+                    case 'rock-smash':
+                    case 'dark-grass':
+                    case 'walk':
+                        grassDisplay.value = '';
+                        break;
+
+                    case 'surf':
+                        surfDisplay.value = '';
+                        break;
+
+                    case 'super-rod':
+                    case 'old-rod':
+                    case 'good-rod':
+                        fishDisplay.value = '';
+                        break;
+
+                    default:
+                        console.log(encounter.encounter_method.name);
+                }
+            }
+
+            if (areaData.encounter_method_rates.length === 0) {
+                console.log(areaData);
+            }
+        }
+    }
+
+    
+
+    // if (props.object.encounters.length > 0) {
+
+    //     //console.log(name.value);
+        
+    //     for (const encounter of props.object.encounters) {
+
+    //         for (const detail of encounter.areaObject.version_details) {
+
+    //             if (detail.version.name === 'black' || detail.version.name === 'white') {
+                    
+    //                 for (const encounter_detail of detail.encounter_details) {
+
+    //                     //console.log(`${encounter.dexID} ${encounter_detail.method.name}`)
+
+    //                     if (encounter.dexID === '632') {
+    //                         console.log(encounter);
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
+    
 
 </script>
 
